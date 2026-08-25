@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naukowcy — Centrum Badań "Bekas"</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #E9E5D8;
+    --paper-2: #E1DCCB;
+    --ink: #201E1A;
+    --ink-soft: #4A463E;
+    --rule: #C7BFA8;
+    --stamp: #A13328;
+    --stamp-soft: #c96355;
+    --seal: #2F4A52;
+    --badge: #E8B23D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+  }
+  .texture{
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px);
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    margin:0 0 0.4em 0;
+    letter-spacing:-0.01em;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color: var(--seal); }
+
+  .topnav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 1.6rem 8vw;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border-bottom:1px solid var(--rule);
+    flex-wrap:wrap;
+    gap:0.6rem;
+  }
+  .topnav .brand{ color:var(--ink); font-weight:500; text-decoration:none; }
+  .topnav nav a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    margin-left:1.6rem;
+  }
+  .topnav nav a:hover{ color:var(--stamp); }
+
+  .header{
+    padding: 6vh 8vw 4vh 8vw;
+    border-bottom:1px solid var(--rule);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .header h1{ font-size:clamp(2rem, 4.6vw, 3.2rem); margin-top:0.6rem; }
+
+  .roster{
+    max-width:820px;
+    margin:0 auto;
+    padding: 7vh 6vw 12vh 6vw;
+    display:flex;
+    flex-direction:column;
+    gap:2.4rem;
+  }
+
+  .profile-card{
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    padding:2.6rem;
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:2.4rem;
+  }
+  .avatar-lg{
+    width:140px; height:140px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-size:2.4rem;
+    font-weight:700;
+    border:3px solid var(--stamp);
+  }
+  .avatar-lg.seal-border{ border-color:var(--seal); }
+
+  .profile-name{ font-size:1.6rem; }
+  .profile-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--seal);
+    margin-top:0.3rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+
+  .profile-x{
+    margin-top:0.6rem;
+  }
+  .profile-x a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    text-decoration:none;
+    color:var(--ink-soft);
+  }
+  .profile-x a:hover{ color:var(--stamp); }
+
+  .profile-meta{
+    display:flex;
+    gap:2rem;
+    margin:1.4rem 0 1.6rem 0;
+    flex-wrap:wrap;
+  }
+  .profile-meta .stat .n{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem;
+    font-weight:600;
+    display:block;
+  }
+  .profile-meta .stat .l{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+  }
+
+  .profile-card p{ color:var(--ink-soft); margin:0.9rem 0; }
+
+  .quote-block{
+    border-left:3px solid var(--stamp);
+    padding:1.2rem 1.6rem;
+    margin-top:1.6rem;
+    font-style:italic;
+    color:var(--ink);
+    background:var(--paper);
+  }
+
+  .named-concepts{
+    margin-top:1.8rem;
+    padding-top:1.4rem;
+    border-top:1px solid var(--rule);
+  }
+  .named-concepts .lbl{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:0.8rem;
+  }
+  .concept-item{
+    display:flex;
+    flex-direction:column;
+    gap:0.25rem;
+    padding:0.9rem 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .concept-item:last-child{ border-bottom:none; }
+  .concept-item .name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .concept-item .src{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+  }
+
+  .tag-row{
+    display:flex;
+    gap:0.6em;
+    flex-wrap:wrap;
+    margin-top:1.4rem;
+  }
+  .tag{
+    border:1px solid var(--seal);
+    color:var(--seal);
+    padding:0.3em 0.8em;
+    border-radius:4px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+  }
+
+  footer{
+    padding:5vh 8vw;
+    border-top:1px solid var(--rule);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width: 640px){
+    .profile-card{ grid-template-columns:1fr; text-align:center; }
+    .avatar-lg{ margin:0 auto; }
+    .profile-meta{ justify-content:center; }
+    .tag-row{ justify-content:center; }
+  }
+</style>
+</head>
+<body class="texture">
+
+  <div class="topnav">
+    <a class="brand" href="index.html">Centrum Badań "Bekas"</a>
+    <nav>
+      <a href="index.html#publikacja">Publikacje</a>
+      <a href="naukowcy.html">Naukowcy</a>
+      <a href="https://x.com/WitWalasikCBB" target="_blank" rel="noopener">X: Wit</a>
+      <a href="https://x.com/KacperPietCBB" target="_blank" rel="noopener">X: Kacper</a>
+    </nav>
+  </div>
+
+  <section class="header">
+    <span class="eyebrow">Zespół</span>
+    <h1>Naukowcy Centrum</h1>
+  </section>
+
+  <section class="roster">
+    <div class="profile-card">
+      <div class="avatar-lg">WW</div>
+      <div>
+        <div class="profile-name">Wit Walasik</div>
+        <div class="profile-title">dr n. strukt. — doktor nauk strukturologicznych</div>
+        <div class="profile-x"><a href="https://x.com/WitWalasikCBB" target="_blank" rel="noopener">X: @WitWalasikCBB</a></div>
+
+        <div class="profile-meta">
+          <div class="stat"><span class="n">2025</span><span class="l">początek pracy naukowej</span></div>
+          <div class="stat"><span class="n">2026</span><span class="l">początek kutanoidyki</span></div>
+          <div class="stat"><span class="n">02</span><span class="l">opublikowane teorie</span></div>
+        </div>
+
+        <p>Naukowiec niezależny, działający poza tradycyjną afiliacją uczelnianą. Pracę badawczą rozpoczął w 2025 roku, koncentrując się początkowo na ogólnych zagadnieniach strukturologii. Od 2026 roku poświęca się rozwijaniu kutanoidyki jako pierwszej w pełni opracowanej gałęzi tej dziedziny.</p>
+
+        <p>Otwarcie krytykuje bariery instytucjonalne stawiane badaczom pracującym poza systemem akademickim i konsekwentnie opowiada się za pełną wolnością naukową — prawem do prowadzenia i publikowania badań niezależnie od afiliacji, grantów czy zgody recenzentów zewnętrznych.</p>
+
+        <div class="quote-block">
+          „Nauka nie powinna czekać na pozwolenie. Powinna czekać na dowody — a te przedstawiam sam, na własnych warunkach.”
+        </div>
+
+        <div class="named-concepts">
+          <span class="lbl">Nazwane koncepcje</span>
+          <div class="concept-item">
+            <span class="name">Sprzężenie Walasika</span>
+            <span class="src">Teoria Rezonansu Kutanoicznego, 2026</span>
+          </div>
+          <div class="concept-item">
+            <span class="name">Proporcja Walasika</span>
+            <span class="src">Proporcja Walasika, 2026</span>
+          </div>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">strukturologia</span>
+          <span class="tag">kutanoidyka</span>
+          <span class="tag">badacz niezależny</span>
+          <span class="tag">wolność naukowa</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="avatar-lg seal-border">KP</div>
+      <div>
+        <div class="profile-name">Kacper Pietrzak</div>
+        <div class="profile-title">mgr n. korel. — magister nauk korelacjonistycznych</div>
+        <div class="profile-x"><a href="https://x.com/KacperPietCBB" target="_blank" rel="noopener">X: @KacperPietCBB</a></div>
+
+        <div class="profile-meta">
+          <div class="stat"><span class="n">2026</span><span class="l">początek pracy naukowej</span></div>
+          <div class="stat"><span class="n">2026</span><span class="l">początek korelacjonistyki</span></div>
+          <div class="stat"><span class="n">00</span><span class="l">opublikowane teorie</span></div>
+        </div>
+
+        <p>Najmłodszy stażem członek Centrum, dołączył w 2026 roku. Specjalizuje się w korelacjonistyce — poszukiwaniu i dokumentowaniu statystycznie realnych, lecz pozornie niepowiązanych zależności między zjawiskami.</p>
+
+        <p>Ściśle współpracuje z dr. Witem Walasikiem: dostarcza materiał obserwacyjny (rzeczywiste korelacje w danych), który następnie zostaje ujęty w ramy teoretyczne strukturologii.</p>
+
+        <div class="quote-block">
+          „Dane same w sobie niczego nie tłumaczą. Ale pokazują, gdzie warto zadać pytanie.”
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">korelacjonistyka</span>
+          <span class="tag">analiza danych</span>
+          <span class="tag">badacz niezależny</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Centrum Badań "Bekas".</span>
+    <span>Centrum Badań "Bekas" — projekt autorski.</span>
+    <a href="https://x.com/WitWalasikCBB" target="_blank" rel="noopener" style="color:var(--seal); text-decoration:none;">X: @WitWalasikCBB</a>
+    <a href="https://x.com/KacperPietCBB" target="_blank" rel="noopener" style="color:var(--seal); text-decoration:none;">X: @KacperPietCBB</a>
+  </footer>
+
+</body>
+</html>

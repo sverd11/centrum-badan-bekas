@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proporcja Walasika — Centrum Badań "Bekas"</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #E9E5D8;
+    --paper-2: #E1DCCB;
+    --ink: #201E1A;
+    --ink-soft: #4A463E;
+    --rule: #C7BFA8;
+    --stamp: #A13328;
+    --stamp-soft: #c96355;
+    --seal: #2F4A52;
+    --badge: #E8B23D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+  }
+  .texture{
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px);
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    margin:0 0 0.4em 0;
+    letter-spacing:-0.01em;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color: var(--seal); }
+
+  .topbar{
+    padding: 2rem 6vw;
+    border-bottom:1px solid var(--rule);
+  }
+  .topbar a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--ink-soft);
+  }
+  .topbar a:hover{ color:var(--stamp); }
+
+  .article{
+    max-width:760px;
+    margin:0 auto;
+    padding: 8vh 6vw 12vh 6vw;
+  }
+  .article-head{ margin-bottom:3.5rem; position:relative; }
+  .article-head .doi{ font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--ink-soft); }
+  .article-head h1{ font-size:clamp(2rem, 4.4vw, 3rem); margin-top:0.8rem; line-height:1.05; }
+  .article-head .subtitle{ font-style:italic; color:var(--ink-soft); font-size:1.05rem; margin-top:0.6rem; }
+
+  .authorline{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-top:1.4rem;
+    padding-top:1.2rem;
+    border-top:1px solid var(--rule);
+  }
+  .author-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:0.6em;
+    background:var(--badge);
+    color:#201E1A;
+    padding:0.4em 0.9em 0.4em 0.4em;
+    border-radius:999px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    font-weight:500;
+  }
+  .author-badge .avatar{
+    width:24px; height:24px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.62rem;
+  }
+  .authorline .date{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--ink-soft); font-style:italic; }
+  .authorline .cats{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; }
+  .cat-pill{
+    border:1px solid var(--seal);
+    color:var(--seal);
+    padding:0.3em 0.8em;
+    border-radius:4px;
+    margin-right:0.4em;
+  }
+
+  .stamp-review{
+    position:absolute;
+    top:-10px; right:0;
+    border:2px solid var(--stamp);
+    color:var(--stamp);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.6rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:0.5em 0.7em;
+    transform:rotate(6deg);
+    text-align:center;
+    line-height:1.35;
+    opacity:0.9;
+  }
+  .abstract{
+    background:var(--paper-2);
+    border-left:3px solid var(--seal);
+    padding:1.6rem 1.8rem;
+    margin:2.4rem 0 3rem 0;
+    font-size:0.98rem;
+    color:var(--ink-soft);
+  }
+  .abstract .lbl{ font-family:'IBM Plex Mono', monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--seal); display:block; margin-bottom:0.6em; }
+
+  .article h2{
+    font-size:1.5rem;
+    margin-top:3.4rem;
+    padding-top:0.4rem;
+    border-top:1px solid var(--rule);
+  }
+  .article h3{ font-size:1.15rem; margin-top:1.8rem; }
+  .article p{ margin:1.1rem 0; }
+  .article ul, .article ol{ padding-left:1.4rem; }
+  .article li{ margin:0.5rem 0; }
+
+  .eq{
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    padding:1.3rem 1.5rem;
+    margin:1.6rem 0;
+    text-align:center;
+    font-size:1.05rem;
+    overflow-x:auto;
+  }
+  .eq .n{ display:block; font-size:0.65rem; color:var(--ink-soft); margin-top:0.7em; letter-spacing:0.04em; }
+
+  .const-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.6rem 0;
+    font-size:0.92rem;
+  }
+  .const-table th, .const-table td{
+    text-align:left;
+    padding:0.65rem 0.8rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .const-table th{ font-family:'IBM Plex Mono', monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); }
+  .const-table td.sym{ font-family:'IBM Plex Mono', monospace; }
+
+  .diagram-wrap{ margin:2rem 0; }
+  .diagram-wrap svg{ width:100%; height:auto; display:block; }
+  .diagram-cap{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ink-soft); margin-top:0.7em; text-align:center; }
+
+  .faq-item{ border-bottom:1px solid var(--rule); padding:1.4rem 0; }
+  .faq-item .q{ font-weight:600; font-family:'Fraunces', serif; font-size:1.05rem; }
+  .faq-item .a{ color:var(--ink-soft); margin-top:0.5rem; }
+
+  .biblio{ font-size:0.88rem; color:var(--ink-soft); }
+  .biblio li{ margin-bottom:0.6rem; }
+
+  footer{
+    padding:5vh 8vw;
+    border-top:1px solid var(--rule);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width: 720px){
+    .stamp-review{ position:static; display:inline-block; margin-top:1rem; transform:rotate(-2deg); }
+  }
+</style>
+</head>
+<body class="texture">
+
+  <div class="topbar">
+    <a href="../index.html">← powrót do strony głównej</a>
+  </div>
+
+  <article class="article">
+    <div class="article-head">
+      <div class="stamp-review">BEKAS<br>v1.0<br>2026</div>
+      <div class="doi">C-B Bekas- 02</div>
+      <h1>Proporcja Walasika</h1>
+      <p class="subtitle">O nieuchronnej zbieżności wielkości rosnących w stałym tempie</p>
+      <div class="authorline">
+        <a class="author-badge" href="../naukowcy.html" style="text-decoration:none;">
+          <span class="avatar">WW</span>
+          dr n. strukt. Wit Walasik
+        </a>
+        <span class="date">2026-08-17</span>
+        <span class="cats"><span class="cat-pill">matematyka</span><span class="cat-pill">strukturologia</span></span>
+      </div>
+    </div>
+
+    <div class="abstract">
+      <span class="lbl">Streszczenie</span>
+      Wprowadzamy pojęcia Minorytu (m) i Majorytu (M) jako dwóch wielkości rosnących w identycznym tempie przy zachowaniu stałej różnicy początkowej. Definiujemy Równanie Proporcji Walasika, opisujące stosunek m do M w czasie, oraz wykazujemy, że stosunek ten dąży nieuchronnie do jedności — niezależnie od tego, jak duża była różnica początkowa. Zjawisko to nazywamy Proporcją Walasika i rozpatrujemy jego przejawy poza matematyką czystą.
+    </div>
+
+    <h2>1. Wprowadzenie</h2>
+    <p>Zjawisko to zostało po raz pierwszy zauważone przy analizie prostego przypadku: dwie osoby w wieku 20 i 60 lat pozostają w stosunku 1:3. Dwadzieścia lat później, mając odpowiednio 40 i 80 lat, pozostają już w stosunku 1:2 — mimo że różnica między nimi (40 lat) nie zmieniła się ani trochę. Obserwacja ta, choć banalna w warstwie arytmetycznej, prowadzi do wniosku o szerszym znaczeniu: każda para wielkości rosnących w tym samym tempie przy stałej różnicy początkowej zbliża się proporcjonalnie do siebie z upływem czasu, dążąc w granicy do stosunku 1:1.</p>
+    <p>Niniejsza praca formalizuje to zjawisko jako Proporcję Walasika i rozszerza je poza pierwotny, wąski przykład wieku — na dowolne dwie wielkości spełniające te same założenia wzrostu.</p>
+
+    <h2>2. Definicje podstawowe</h2>
+    <h3>2.1 Minoryt (m)</h3>
+    <p>Minoryt to mniejsza z dwóch rozpatrywanych wielkości w chwili początkowej (t=0), oznaczana m₀, oraz jej wartość w dowolnej chwili t: m(t) = m₀ + t.</p>
+    <h3>2.2 Majoryt (M)</h3>
+    <p>Majoryt to większa z dwóch wielkości, analogicznie: M(t) = M₀ + t, przy założeniu że M₀ &gt; m₀.</p>
+    <h3>2.3 Proporcja Walasika (P)</h3>
+    <p>Proporcją Walasika nazywamy stosunek Minorytu do Majorytu w chwili t: P(t) = m(t) / M(t). Kluczową własnością tego stosunku jest jego zachowanie graniczne wraz ze wzrostem t.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wykres zbieżności Proporcji Walasika do 1">
+        <defs>
+          <marker id="arrH2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#4A463E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <line x1="60" y1="220" x2="600" y2="220" stroke="#4A463E" stroke-width="1.4" marker-end="url(#arrH2)"/>
+        <line x1="60" y1="220" x2="60" y2="30" stroke="#4A463E" stroke-width="1.4" marker-end="url(#arrH2)"/>
+        <text x="605" y="235" font-family="IBM Plex Mono, monospace" font-size="12" fill="#4A463E">t</text>
+        <text x="40" y="35" font-family="IBM Plex Mono, monospace" font-size="12" fill="#4A463E">P(t)</text>
+
+        <line x1="60" y1="60" x2="600" y2="60" stroke="#A13328" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="605" y="65" font-family="IBM Plex Mono, monospace" font-size="12" fill="#A13328">1</text>
+
+        <path d="M60 210 Q 150 130, 280 90 T 600 62" fill="none" stroke="#2F4A52" stroke-width="2.5"/>
+
+        <circle cx="60" cy="210" r="4" fill="#2F4A52"/>
+        <text x="70" y="205" font-family="IBM Plex Mono, monospace" font-size="11" fill="#4A463E">m₀/M₀ = 1/3</text>
+      </svg>
+      <div class="diagram-cap">Rys. 1 — Proporcja Walasika P(t) rośnie monotonicznie i dąży asymptotycznie do 1, niezależnie od wartości początkowej.</div>
+    </div>
+
+    <h2>3. Równanie Proporcji Walasika (fundamentalne)</h2>
+    <p>Formalnie, Proporcję Walasika zapisujemy jako:</p>
+    <div class="eq">
+      P(t) = (m₀ + t) / (M₀ + t)
+      <span class="n">gdzie M₀ − m₀ = τ (stałe dla danej pary)</span>
+    </div>
+    <p>Przekształcając powyższe, można wykazać że P(t) = 1 − τ/(M₀+t), skąd wynika bezpośrednio, że przy t→∞, P(t)→1. Co istotne, tempo tej zbieżności jest odwrotnie proporcjonalne do τ — im mniejsza stała różnica początkowa, tym szybciej para wielkości "zrównuje się" proporcjonalnie.</p>
+
+    <h2>4. Stałe Proporcji Walasika</h2>
+    <table class="const-table">
+      <thead><tr><th>Symbol</th><th>Nazwa</th><th>Znaczenie</th></tr></thead>
+      <tbody>
+        <tr><td class="sym">ρ₀</td><td>Proporcja Początkowa</td><td>ρ₀ = m₀/M₀ — stosunek w chwili t=0, punkt wyjścia zbieżności</td></tr>
+        <tr><td class="sym">τ</td><td>Tau Zbieżności Walasika</td><td>τ = M₀ − m₀ — stała różnica bezwzględna, determinuje tempo dążenia P(t) do 1</td></tr>
+      </tbody>
+    </table>
+
+    <h2>5. Zastosowania</h2>
+    <p>Podobnie jak w przypadku Sprzężenia Walasika, wzorzec opisany Równaniem Proporcji odnajdujemy w układach z pozoru odległych od matematyki czystej:</p>
+    <ul>
+      <li><strong>Ekonomia:</strong> przy zbliżonym względnym tempie wzrostu majątku dwóch podmiotów, bezwzględna różnica pozostaje stała, jednak ich proporcja majątkowa maleje z czasem — zjawisko, które bywa mylnie odczytywane jako "zacieranie się nierówności", mimo że dysproporcja bezwzględna (τ) wcale nie znika.</li>
+      <li><strong>Relacje i psychologia:</strong> różnica doświadczenia życiowego między dwojgiem partnerów, wyrażona w latach, pozostaje niezmienna, lecz jej znaczenie proporcjonalne maleje wraz z upływem wspólnego czasu.</li>
+      <li><strong>Technologia:</strong> dwa systemy rozwijane w tym samym tempie, lecz z różnym momentem startu, wykazują malejącą przepaść proporcjonalną — mimo że bezwzględna różnica funkcjonalności (τ) między nimi pozostaje formalnie stała.</li>
+    </ul>
+    <p>We wszystkich trzech przypadkach należy podkreślić: maleje wyłącznie proporcja (P), nie różnica bezwzględna (τ) — rozróżnienie to jest kluczowe i, jak wykazujemy w Sekcji 6, bywa źródłem nieporozumień.</p>
+
+    <h2>6. Krytyka i odpowiedzi</h2>
+    <div class="faq-item">
+      <div class="q">„To tylko banalna własność arytmetyczna, znana od zawsze.”</div>
+      <div class="a">Sama zależność liczbowa jest prosta — jej wartość leży w rozpoznaniu, że dokładnie ten sam wzorzec matematyczny opisuje zjawiska w ekonomii, relacjach i technologii, mimo pozornego braku związku między tymi dziedzinami.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">„Mylicie zbieżność proporcji ze zbieżnością rzeczywistą — różnica τ przecież się nie zmniejsza.”</div>
+      <div class="a">To rozróżnienie jest w pracy wyraźnie zaznaczone (Sekcja 5) i stanowi część istoty zjawiska, nie jego słabość: Proporcja Walasika opisuje wyłącznie zachowanie stosunku, nigdy różnicy bezwzględnej.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">„Zastosowania w ekonomii i relacjach są zbyt swobodne.”</div>
+      <div class="a">Zgadzamy się, że przeniesienie modelu matematycznego na zjawiska społeczne wymaga dalszej walidacji ilościowej, którą pozostawiamy jako kierunek przyszłych badań, zgodnie z metodologią przyjętą również w Teorii Rezonansu Kutanoicznego.</div>
+    </div>
+
+    <h2>7. Bibliografia</h2>
+    <ol class="biblio">
+      <li>dr n. strukt. Wit Walasik. <em>Obserwacja wstępna: stosunek wieku a upływ czasu.</em> Notatki robocze, 2026.</li>
+      <li>dr n. strukt. Wit Walasik. <em>Formalizacja Równania Proporcji Walasika.</em> Centrum Badań "Bekas", 2026.</li>
+    </ol>
+  </article>
+
+  <footer>
+    <span>© 2026 Centrum Badań "Bekas".</span>
+    <span>Centrum Badań "Bekas" — projekt autorski.</span>
+    <a href="https://x.com/WitWalasikCBB" target="_blank" rel="noopener" style="color:var(--seal); text-decoration:none;">X: @WitWalasikCBB</a>
+    <a href="https://x.com/KacperPietCBB" target="_blank" rel="noopener" style="color:var(--seal); text-decoration:none;">X: @KacperPietCBB</a>
+  </footer>
+
+</body>
+</html>
